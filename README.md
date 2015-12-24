@@ -1,5 +1,7 @@
 # GeneSynonym
 
+[![Build Status](https://travis-ci.org/OpenGene/GeneSynonym.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneSynonym.jl)
+
 ### Add GeneSynonym
 This project has no plan to register in Julia METADATA.jl, so if want to use it, do:
 
