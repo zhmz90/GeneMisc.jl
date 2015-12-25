@@ -1,48 +1,3 @@
-module GeneSynonym
-
-# package code goes here
-
-using JLD
-
-export query_gene
-
-const data_dir = "../data"
-const hs_fl    = joinpath(data_dir, "Homo_sapiens.gene_info")
-const gene_synonym_fl = joinpath(data_dir, "gene_synonym_dict.jld")
-const id_genes_fl = joinpath(data_dir, "id_genes_dict.jld")
-const gene_id_fl  = joinpath(data_dir, "gene_id_dict.jld")
-global id_genes,gene_id
-
-
-@doc """ load index for synonym genes
-""" ->
-function load_index()
-    if isfile(id_genes_fl) || isfile(gene_id_fl)
-        build_index()
-    end
-    global id_genes = load(id_genes_fl, "id_genes_dict")
-    global gene_id  = load(gene_id_fl,  "gene_id_dict")
-    gene_id,id_genes
-end
-
-@doc """ query a gene's synonym including itself with a gene name
-""" ->
-function query_gene(genename::ASCIIString)
-    id_genes[gene_id[genename]]
-end
-
-@doc """ query synonym for genes
-""" ->
-function query_gene(genenames::Array{ASCIIString,1})
-    map(query_gene, genenames)
-end
-
-@doc """ build index for genes
-""" ->
-function build_index()
-    data = read_data()
-    genename_synonym(data)
-end
 
 @doc """ read data from Homo_sapiens.gene_info
 """ ->
@@ -88,6 +43,3 @@ function genename_synonym(data::Array{ASCIIString,2})
 
     nothing
 end
-
-
-end # module

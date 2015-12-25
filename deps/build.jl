@@ -6,6 +6,10 @@ const hs_fl    = joinpath(data_dir, "Homo_sapiens.gene_info")
 const gene_synonym_fl = joinpath(data_dir, "gene_synonym_dict.jld")
 const id_genes_fl = joinpath(data_dir, "id_genes_dict.jld")
 const gene_id_fl  = joinpath(data_dir, "gene_id_dict.jld")
+const genecode_fl = joinpath(data_dir, "gencode.v19.annotation.gtf")
+const pos_gene_fl = joinpath(data_dir, "pos_gene_dict.jld")
+
+include("../src/genelocation.jl")
 
 build_index()
 
@@ -54,9 +58,16 @@ function genename_synonym(data::Array{ASCIIString,2})
     nothing
 end
 
+
 @doc """ build index for genes
 """ ->
 function build_index()
+    #for id_genes,gene_id
     data = read_data()
     genename_synonym(data)
+
+    #for pos_gene
+    build_pos_gene()
+
+    true
 end

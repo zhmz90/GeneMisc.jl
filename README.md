@@ -1,4 +1,4 @@
-# GeneSynonym
+# GeneMisc
 
 Linux, OSX: [![Build Status](https://travis-ci.org/OpenGene/GeneSynonym.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneSynonym.jl)
 
