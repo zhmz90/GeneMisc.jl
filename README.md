@@ -18,11 +18,25 @@ This project is under active developing, if you encountered any troubles, open a
 
 **query a gene for its synonym**
 
-	using GeneSynonym
+	using GeneMisc
 	query_gene("TP53")
 	
 **query a lot of genes**
 
-	using GeneSynonym
+	using GeneMisc
 	genes = ASCIIString["TP53","KRAS","BRCA"]
 	query_gene(genes)
+
+**query a gene given its location**
+
+	using GeneMisc
+	chr = "chr1"
+	pos = "12235"
+	query_gene(chr,pos)
+	
+**query a lot of genes given their locations**
+
+	using GeneMisc
+	chr_pos = ["chr1" "123234";
+               "chr2", "21424"]
+	query_gene(chr_pos)
