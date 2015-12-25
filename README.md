@@ -9,8 +9,9 @@ Code Coverage: [![Coverage Status](https://coveralls.io/repos/JuliaLang/julia/ba
 ### Add GeneSynonym
 This project has no plan to register in Julia METADATA.jl, so if want to use it, do:
 
-	Pkg.clone("https://github.com/OpenGene/GeneSynonym.jl.git")
-	Pkg.build("GeneSynonym")
+	Pkg.clone("https://github.com/OpenGene/GeneMisc.jl.git")
+	Pkg.build("GeneMisc")
+	Pkg.test("GeneMisc")
 	
 This project is under active developing, if you encountered any troubles, open an issue please.
 	
