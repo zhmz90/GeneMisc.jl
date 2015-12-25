@@ -6,7 +6,7 @@ Windows: [![Build status](https://ci.appveyor.com/api/projects/status/4vr88cmgo7
 
 Code Coverage: [![Coverage Status](https://coveralls.io/repos/JuliaLang/julia/badge.svg?branch=master)](https://coveralls.io/r/JuliaLang/julia?branch=master) [![codecov.io](http://codecov.io/github/JuliaLang/julia/coverage.svg?branch=master)](http://codecov.io/github/JuliaLang/julia?branch=master)
 
-### Add GeneSynonym
+### Add GeneMisc
 This project has no plan to register in Julia METADATA.jl, so if want to use it, do:
 
 	Pkg.clone("https://github.com/OpenGene/GeneMisc.jl.git")
