@@ -1,7 +1,7 @@
 
 using JLD
 
-const data_dir = "../data"
+const data_dir = joinpath(dirname(@__FILE__), "data")
 const hs_fl    = joinpath(data_dir, "Homo_sapiens.gene_info")
 const gene_synonym_fl = joinpath(data_dir, "gene_synonym_dict.jld")
 const id_genes_fl = joinpath(data_dir, "id_genes_dict.jld")
@@ -11,8 +11,6 @@ const pos_gene_fl = joinpath(data_dir, "pos_gene_dict.jld")
 
 include("../src/genelocation.jl")
 
-build_index()
-
 @doc """ read data from Homo_sapiens.gene_info
 """ ->
 function read_data()
@@ -21,8 +19,8 @@ function read_data()
     end 
     if !isfile(hs_fl)
         cmd = `wget ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz`
-        rum(cmd)
-        run(`gunzip $string(hs_fl,".gz")`)
+        run(cmd)
+        run(`gunzip $(string(hs_fl,".gz"))`)
     end
     @assert isfile(hs_fl)
     data = readdlm(hs_fl, ASCIIString)
@@ -71,3 +69,5 @@ function build_index()
 
     true
 end
+
+build_index()
