@@ -7,7 +7,7 @@ function read_data()
     end 
     if !isfile(hs_fl)
         cmd = `wget ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz`
-        rum(cmd)
+        run(cmd)
         run(`gunzip $(string(hs_fl,".gz"))`)
     end
     @assert isfile(hs_fl)
