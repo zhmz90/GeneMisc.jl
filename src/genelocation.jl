@@ -6,7 +6,7 @@ function download_gencode()
     if !isdir(data_dir)
         mkdir(data_dir)
     end
-    @info("Downloading gencode.v19.annotation.gtf now")
+    info("Downloading gencode.v19.annotation.gtf now")
     cmd = `wget -c
     ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
     $(abspath(gz_genecode))`
@@ -21,7 +21,7 @@ function read_gtf()
     if !isfile(genecode_fl)
         download_gencode()
     end
-    records =  Array{ASCIIString,2}()
+    records =  Array{ASCIIString,2}(0,9)
     open(genecode_fl) do file
         while !eof(file)
             line = readline(file)
@@ -31,7 +31,7 @@ function read_gtf()
             fields = split(strip(line,'\n'),"\t")
             num_field = length(fields)
             @assert num_field == 9
-            push!(records, fields)
+            records = vcat(records, fields')
         end
     end
     records
@@ -40,6 +40,7 @@ end
 @doc """ get chr, start, end, gene_name given records
 """ ->
 function get_gene_mgp(data::Array{ASCIIString,2})
+    info("begin get_gene_mgp")
     @assert size(data,2) == 9
     n = size(data,1)
     gene_mgs = @parallel (hcat) for i = 1:n
@@ -70,15 +71,19 @@ end
 function pos_gene_dict(data::Array{ASCIIString,2})
     @assert size(data,2) == 4
     #TODO check st,eds not intersect
-    pos_gene = Dict{Tuple{ASCIIString,Int64}, ASCIIString}()
-    for i = 1:size(data,1)
+    #pos_gene = Dict{Tuple{ASCIIString,Int64}, ASCIIString}()
+    info("begin pos_gene_dict big paralel for loop")
+    pos_gene = @parallel (union) for i = 1:size(data,1)
         genename = data[i,1]
         chr      = data[i,2]
         st       = data[i,3]
         ed       = data[i,4]
-        for pos = st:ed
-            pos_gene[(chr,pos)] = genename
+        @assert st<=ed
+        pos_genes = Array{Pair{Tuple{ASCIIString,Int64},ASCIIString},1}(ed-st+1)
+        for i = 1:(ed-st+1)
+            pos_genes[i] = Pair{Tuple{ASCIIString,Int64},ASCIIString}((chr,pos),genename)
         end
+        pos_genes
     end
     save(pos_gene_dict_fl, "pos_gene_dict", pos_gene)
 

@@ -24,11 +24,18 @@ function genename_synonym(data::Array{ASCIIString,2})
 
     id_genes = Dict{Int64, Set{ASCIIString}}()
     for i = 1:num_gene
-        id_genes[i] = Set(vcat(genenames[i], synonyms[i]))
+        id_genes[i] = filter(x->x!="-", Set(vcat(genenames[i], synonyms[i])))
     end
-    save(id_genes_fl, "id_genes_dict", id_genes)
+
+    #@show id_genes
+    #@show id_genes_fl
+    #id_genes = [1,2,3]
+    save("test.jld", "id_genes_dict", id_genes)
+#    info("successfully saved ")
+ #   exit(0)
+   # JLD.save(id_genes_fl, "id_genes_dict", id_genes)
     
-    genes_id_pair = map(reverse, collect(id_genes))
+    genes_id_pair = map(x->(collect(x[1]),x[2]), map(reverse, collect(id_genes)))
     gene_id = Dict{ASCIIString,Int64}()
     for i = 1:num_gene
         samplegenes = genes_id_pair[i][1]
@@ -39,7 +46,7 @@ function genename_synonym(data::Array{ASCIIString,2})
             gene_id[genename] = id
         end
     end
-    save(gene_id_fl, "gene_id_dict", gene_id)
+    JLD.save(gene_id_fl, "gene_id_dict", gene_id)
 
     nothing
 end

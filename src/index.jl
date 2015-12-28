@@ -14,11 +14,13 @@ end
 """ ->
 function build_index()
     #for id_genes,gene_id
-    data = read_data()
-    genename_synonym(data)
-
-    #for pos_gene
-    build_pos_gene()
+    #data = read_data()
+    @sync begin
+        @spawnat 2 genename_synonym(read_data())
+    #info("build_pos_gene beginning")
+        #for pos_gene
+        build_pos_gene()
+    end
 
     true
 end
