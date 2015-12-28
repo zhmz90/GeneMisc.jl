@@ -1,7 +1,7 @@
 module GeneMisc
 
 # package code goes here
-using ParallelAccelerator
+#using ParallelAccelerator
 using JLD
 #using Logging
 #@Logging.configure(level=INFO)
