@@ -3,9 +3,13 @@
 """ ->
 function download_gencode()
     gz_genecode = string(genecode_fl, ".gz")
-    cmd = `wget
+    if !isdir(data_dir)
+        mkdir(data_dir)
+    end
+    @info("Downloading gencode.v19.annotation.gtf now")
+    cmd = `wget -c
     ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
-    $gene_code_fl`
+    $(abspath(gz_genecode))`
     run(cmd)
     
     run(`guzip $(gz_genecode) $(genecode_fl)`)
