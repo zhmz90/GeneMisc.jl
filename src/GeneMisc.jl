@@ -5,7 +5,7 @@ module GeneMisc
 using JLD
 using Logging
 @Logging.configure(level=INFO)
-const data_dir = joinpath(dirname(@__FILE__), "data")
+const data_dir = joinpath(driname(dirname(@__FILE__)), "data")
 const hs_fl    = joinpath(data_dir, "Homo_sapiens.gene_info")
 const gene_synonym_fl = joinpath(data_dir, "gene_synonym_dict.jld")
 const id_genes_fl = joinpath(data_dir, "id_genes_dict.jld")
