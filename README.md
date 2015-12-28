@@ -3,7 +3,9 @@
 This package will be ready for users in a few days.
 
 Given a gene name, find its synonyms genes.
+
 Given a gene nane, find its location.
+
 Given a location,  find gene.
 
 Linux, OSX: [![Build Status](https://travis-ci.org/OpenGene/GeneMisc.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneMisc.jl)
