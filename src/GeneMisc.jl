@@ -20,6 +20,6 @@ export query_gene
 
 include("genesynonym.jl")
 include("genelocation.jl")
-include("query.jl ")
+include("query.jl")
 
 end # module
