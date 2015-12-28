@@ -1,7 +1,7 @@
 module GeneMisc
 
 # package code goes here
-
+using ParallelAccelerator
 using JLD
 #using Logging
 #@Logging.configure(level=INFO)
@@ -12,13 +12,16 @@ const id_genes_fl = joinpath(data_dir, "id_genes_dict.jld")
 const gene_id_fl  = joinpath(data_dir, "gene_id_dict.jld")
 const genecode_fl = joinpath(data_dir, "gencode.v19.annotation.gtf")
 const pos_gene_fl = joinpath(data_dir, "pos_gene_dict.jld")
+const gene_chrsted_fl = joinpath(data_dir, "gene_chrsted_dict.jld")
+
 
 global id_genes,gene_id,pos_gene
 
 export query_gene
 
-
-include("genesynonym.jl")
+include("index/synonym.jl")
+include("index/location.jl")
+#include("genesynonym.jl")
 include("genelocation.jl")
 include("index.jl")
 include("query.jl")

@@ -80,42 +80,14 @@ function get_gene_mgp(data::Array{ASCIIString,2})
     nothing
 end
 
-@doc """ Given a location, find which gene it is from.
-         So the index is (chr,pos)=>genename
-         Save it to disk
-""" ->
-function pos_gene_dict(data::Array{ASCIIString,2})
-    @assert size(data,2) == 4
-    #TODO check st,eds not intersect
-    #pos_gene = Dict{Tuple{ASCIIString,Int64}, ASCIIString}()
-    info("begin pos_gene_dict big paralel for loop")
-    pos_gene = @parallel (union) for i = 1:size(data,1)
-        genename = data[i,1]
-        chr      = data[i,2]
-        st       = data[i,3]
-        ed       = data[i,4]
-        @assert st<=ed
-        pos_genes = Array{Pair{Tuple{ASCIIString,Int64},ASCIIString},1}(ed-st+1)
-        for i = 1:(ed-st+1)
-            pos_genes[i] = Pair{Tuple{ASCIIString,Int64},ASCIIString}((chr,pos),genename)
-        end
-        pos_genes
-    end
-    save(pos_gene_dict_fl, "pos_gene_dict", pos_gene)
-
-    nothing
-end
 
 @doc """ build index pos_gene dict
 """ ->
-function build_pos_gene()
+function build_index_geneloc()
     info("reading gtf file to memory")
-    @time gtf = read_gtf()
+    gtf = read_gtf()
     info("Getting gene position from gtf data")
-    @time gene_mgps = get_gene_mgp(gtf)
-
-    info("get_gene mgp successed")
-    #pos_gene_dict(gene_mgps)
-    
+    gene_mgps = get_gene_mgp(gtf)
+    info("building gene_location")
     true
 end
