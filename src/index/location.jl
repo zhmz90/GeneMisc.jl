@@ -75,10 +75,32 @@ function get_gene_mgp(data::Array{ASCIIString,2})
         gene_name,chr,st,ed = get_gene_mgp(data[i,:])
         gene_location[gene_name] = (chr,st,ed)
     end
-
-    location_gene = Dict(map(reverse, collect(gene_location)))
-    save(chrsted_gene_fl, "chrsted_gene_dict", location_gene)
-    info("chrsted_gene_fl is done")
+    # gene_chrsted
+    save(gene_chrsted, "gene_chrsted_dict", gene_chrsted)
+    
+    #(chr,st,ed)=>gene
+    location_gene = sort(map(reverse, collect(gene_location)), by=x->x[1])
+    
+    #chr=>(st,ed)=>gene_name
+    chr_sted_gene = Dict{ASCIIString,Dict{Tuple{UInt64,UInt64},ASCIIString}}()
+    last_chr = location_gene[1][1]
+    tmp_dict = Dict{Tuple{UInt64,UInt64},ASCIIString}()
+    for chrsted_gene in location_gene
+        chrsted,gene = chrsted_gene
+        if chr != last_chr
+            chr_sted_gene[last_chr] = copy(tmp_dict)
+            empty!(tmp_dict)
+            last_chr = chr
+        end
+        chr,st,ed    = chrsted
+        stn = parse(UInt64, st)
+        edn = parse(UInt64, ed)
+        tmp_dict[(stn,edn)] = gene
+    end
+    chr_sted_gene[last_chr] = copy(tmp_dict)
+    
+    save(chr_sted_gene_fl, "chr_sted_gene_dict", chr_sted_gene)
+    info("chr_sted_gene_pair is done")
     
     nothing
 end
