@@ -2,9 +2,13 @@
 @doc """  if pos_gene have this position, return gene; else return ""
 """ ->
 function query_gene(chr::ASCIIString,pos::Int64)
-    chrsteds = sort(keys(chrsted_gene))
-    if in((chr,pos), )
-        return pos_gene[(chr,pos)]
+    sted_gene = chr_sted_gene[chr]
+    steds = collect(keys(sted_gene))
+    # sorted by acclerator speed
+    for (st,ed) in steds
+        if st<=pos<=ed
+            return sted_gene[(st,ed)]
+        end
     end
     ""
 end
@@ -33,5 +37,4 @@ end
 """ ->
 function query_geneloc(genename::ASCIIString)
 
-    
 end
