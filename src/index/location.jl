@@ -87,12 +87,12 @@ function get_gene_mgp(data::Array{ASCIIString,2})
     tmp_dict = Dict{Tuple{UInt64,UInt64},ASCIIString}()
     for chrsted_gene in location_gene
         chrsted,gene = chrsted_gene
+        chr,st,ed    = chrsted        
         if chr != last_chr
             chr_sted_gene[last_chr] = copy(tmp_dict)
             empty!(tmp_dict)
             last_chr = chr
         end
-        chr,st,ed    = chrsted
         stn = parse(UInt64, st)
         edn = parse(UInt64, ed)
         tmp_dict[(stn,edn)] = gene
