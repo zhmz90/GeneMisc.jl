@@ -1,4 +1,4 @@
-if in("../src",LOAD_PATH)
+if !in("../src",LOAD_PATH)
     push!(LOAD_PATH,"../src")
 end
 

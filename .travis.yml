@@ -8,6 +8,8 @@ julia:
   - nightly
 notifications:
   email: false
+#before_install:
+#  - sudo apt-get install 
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia -e 'Pkg.clone(pwd()); Pkg.build("GeneMisc"); Pkg.test("GeneMisc"; coverage=true)'

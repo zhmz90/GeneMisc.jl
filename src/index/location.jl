@@ -83,7 +83,7 @@ function get_gene_mgp(data::Array{ASCIIString,2})
     
     #chr=>(st,ed)=>gene_name
     chr_sted_gene = Dict{ASCIIString,Dict{Tuple{UInt64,UInt64},ASCIIString}}()
-    last_chr = location_gene[1][1]
+    last_chr = location_gene[1][1][1]
     tmp_dict = Dict{Tuple{UInt64,UInt64},ASCIIString}()
     for chrsted_gene in location_gene
         chrsted,gene = chrsted_gene
