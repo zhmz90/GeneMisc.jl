@@ -21,7 +21,7 @@ const gene_chrsted     = joinpath(data_dir, "gene_chrsted.jld")
 
 global id_genes,gene_id,chr_sted_gene,gene_chrsted
 
-export query_gene
+export query_gene,query_geneloc
 
 
 include("utils/utils.jl")
