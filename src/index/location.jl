@@ -7,12 +7,14 @@ function download_gencode()
         mkdir(data_dir)
     end
     info("Downloading gencode.v19.annotation.gtf now")
+    cur_dir = pwd()
+    cd(data_dir)
     cmd = `wget -c
-    ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
-    $(abspath(gz_genecode))`
+    ftp://ftp.sanger.ac.uk/pub/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz`
     run(cmd)
-    
-    run(`guzip $(gz_genecode) $(genecode_fl)`)
+    gz_genecode = string(genecode_fl, ".gz")
+    run(`gunzip $(gz_genecode)`)
+    cd(cur_dir)
 end
 
 @doc """ read gtf file with out header info
@@ -74,8 +76,9 @@ function get_gene_mgp(data::Array{ASCIIString,2})
         gene_location[gene_name] = (chr,st,ed)
     end
 
-    save(gene_chrsted_fl, "gene_chrsted_dict", gene_location)
-    info("gene_chrsted_fl is done")
+    location_gene = Dict(map(reverse, collect(gene_location)))
+    save(chrsted_gene_fl, "chrsted_gene_dict", location_gene)
+    info("chrsted_gene_fl is done")
     
     nothing
 end

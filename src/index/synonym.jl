@@ -6,9 +6,12 @@ function read_data()
         mkdir(data_dir)
     end 
     if !isfile(hs_fl)
+        cur_dir =  pwd()
+        cd(data_dir)
         cmd = `wget ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz`
         run(cmd)
         run(`gunzip $(string(hs_fl,".gz"))`)
+        cd(cur_dir)
     end
     @assert isfile(hs_fl)
     data = readdlm(hs_fl,ASCIIString)::Array{ASCIIString,2}
