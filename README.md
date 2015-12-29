@@ -10,7 +10,6 @@
 
 
 ### Add GeneMisc
-This project has no plan to register in Julia METADATA.jl, so if want to use it, do:
 
 	Pkg.clone("https://github.com/OpenGene/GeneMisc.jl.git")
 	Pkg.build("GeneMisc")
