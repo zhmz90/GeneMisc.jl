@@ -5,7 +5,6 @@ include("location.jl")
 @doc """ build index for genes
 """ ->
 function build_index()
-
     info("Building index now")
     @sync begin
         @spawn build_index_synonym()
@@ -18,8 +17,8 @@ end
 @doc """ load index for synonym genes
 """ ->
 function load_index()
-    if isfile(id_genes_fl) || isfile(gene_id_fl)  ||
-        isfile(chr_sted_gene_fl) || isfile(gene_chrsted_fl)
+    if !isfile(id_genes_fl) || !isfile(gene_id_fl)  ||
+        !isfile(chr_sted_gene_fl) || !isfile(gene_chrsted_fl)
         build_index()
     end
     
