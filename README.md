@@ -3,10 +3,11 @@
 [![Documentation Status](https://readthedocs.org/projects/genemiscjl/badge/?version=latest)](http://genemiscjl.readthedocs.org/en/latest/?badge=latest)
 
 ### What GeneMisc can do now?
-
-* Given a gene name, find its synonyms genes.
-* Given a gene nane, find its location.
 * Given a location,  find gene.
+* Given a gene nane, find its location.
+* Given a gene name, find its synonyms genes.
+
+
 
 ### Add GeneMisc
 This project has no plan to register in Julia METADATA.jl, so if want to use it, do:
