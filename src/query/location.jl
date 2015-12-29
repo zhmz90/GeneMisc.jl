@@ -1,7 +1,11 @@
 
 @doc """  if pos_gene have this position, return gene; else return ""
+          Foundational function
 """ ->
 function query_gene(chr::ASCIIString,pos::Int64)
+    if !isdefined(:chr_sted_gene)
+        load_index()
+    end
     sted_gene = chr_sted_gene[chr]
     steds = collect(keys(sted_gene))
     # sorted by acclerator speed
@@ -36,5 +40,8 @@ end
 @doc """ Given a gene name, find its location: chr, st, ed
 """ ->
 function query_geneloc(genename::ASCIIString)
-
+    if !isdefined(:gene_chrsted)
+        load_index()
+    end
+    gene_chrsted[genename]
 end
