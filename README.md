@@ -5,8 +5,7 @@
 ### What can GeneMisc do now?
 * Given a location,  find gene.
 * Given a gene nane, find its location.
-* Given a gene name, find its synonyms genes.
-
+* Given a gene name, find its synonyms genes, but the synonyms genes may not complete due to the limitation of our data.
 
 
 ### Add GeneMisc
