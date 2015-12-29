@@ -2,9 +2,11 @@
 [![Build Status](https://travis-ci.org/OpenGene/GeneMisc.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneMisc.jl) 
 [![Documentation Status](https://readthedocs.org/projects/genemiscjl/badge/?version=latest)](http://genemiscjl.readthedocs.org/en/latest/?badge=latest)
 
-**Given a gene name, find its synonyms genes.**
-**Given a gene nane, find its location.**
-**Given a location,  find gene.**
+### What GeneMisc can do now?
+
+* Given a gene name, find its synonyms genes.
+* Given a gene nane, find its location.
+* Given a location,  find gene.
 
 ### Add GeneMisc
 This project has no plan to register in Julia METADATA.jl, so if want to use it, do:
