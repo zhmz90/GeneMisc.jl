@@ -16,8 +16,7 @@ const id_genes_fl = joinpath(data_dir, "id_genes_dict.jld")
 
 ### location index
 const chr_sted_gene_fl = joinpath(data_dir, "chr_sted_gene_dict.jld")
-const gene_chrsted     = joinpath(data_dir, "gene_chrsted.jld")
-
+const gene_chrsted_fl  = joinpath(data_dir, "gene_chrsted.jld")
 
 global id_genes,gene_id,chr_sted_gene,gene_chrsted
 
