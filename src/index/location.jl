@@ -76,7 +76,7 @@ function get_gene_mgp(data::Array{ASCIIString,2})
         gene_location[gene_name] = (chr,st,ed)
     end
     # gene_chrsted
-    save(gene_chrsted, "gene_chrsted_dict", gene_chrsted)
+    save(gene_chrsted_fl, "gene_chrsted_dict", gene_location)
     
     #(chr,st,ed)=>gene
     location_gene = sort(map(reverse, collect(gene_location)), by=x->x[1])
