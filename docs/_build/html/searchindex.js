@@ -1,0 +1,1 @@
+Search.setIndex({envversion:46,filenames:["index"],objects:{},objnames:{},objtypes:{},terms:{complet:0,content:0,data:0,due:0,find:0,gene:0,given:0,index:0,limit:0,locat:0,mai:0,modul:0,name:0,nane:0,our:0,page:0,search:0,synonym:0},titles:["Welcome to GeneMisc&#8217;s documentation!"],titleterms:{can:0,document:0,genemisc:0,indic:0,now:0,tabl:0,welcom:0,what:0}})
