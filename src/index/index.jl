@@ -1,6 +1,7 @@
 
 include("synonym.jl")
 include("location.jl")
+include("exon.jl")
 
 @doc """ build index for genes
 """ ->
