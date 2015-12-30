@@ -62,7 +62,7 @@ function range_exon_index(data::Array{ASCIIString,2})
     #not save it
     #save(rng_exon_dict_fl, "rng_exon_dict", rng_exon_dict)
     info("range exon index saved in $rng_exon_dict_fl")
-    @show collect(rng_exon_dict)[1:5],typeof(rng_exon_dict)
+    #@show collect(rng_exon_dict)[1:5],typeof(rng_exon_dict)
     rng_exon_dict
 end
 
@@ -93,6 +93,9 @@ function read_gtf()
             end
             fields = split(strip(line,'\n'),"\t")
             if fields[3] != "exon"
+                continue
+            end
+            if contains(fields[9],"gene_type \"pseudogene\"")
                 continue
             end
             idx += 1

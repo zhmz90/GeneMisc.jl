@@ -28,13 +28,15 @@ function query_exon(chr::ASCIIString, pos::UInt64, direct::ASCIIString)
     function ret(idx)
         map(x->convert(ASCIIString,x), rng_exon[map(x->string(Int64(x)),rngs_target[idx])])
     end
-    
+    num_rng = length(rngs_target)
     st_idx = searchsortedfirst(sts_sorted, pos)
     ed_idx = searchsortedfirst(eds_sorted, pos)
     if st_idx == 1
         return ret(1)
     end
-    
+    if st_idx>num_rng || ed_idx>num_rng
+        return ret(st_idx-1)
+    end
     st1,st2 = sts_sorted[st_idx-1:st_idx] # bugs here
     if st2 == pos
         return ret(st_idx)
@@ -46,7 +48,7 @@ function query_exon(chr::ASCIIString, pos::UInt64, direct::ASCIIString)
     if ed2 == pos
         return ret(ed_idx)
     end
-    
+    @show pos,st1,st2,ed1,ed2
     if pos < ed1
         return ret(st_idx-1)
     else
