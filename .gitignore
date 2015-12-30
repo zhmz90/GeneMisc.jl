@@ -2,6 +2,7 @@
 *.jl.*.cov
 *.jl.mem
 *.info
+*.gene_info
 #*.jl#
 *.jl~
 *.gtf
