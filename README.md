@@ -16,6 +16,7 @@
 	
 This project is under active developing, if you encountered any troubles, open an issue please.
 
+For more information, please refer to the [documentation](http://genemiscjl.readthedocs.org/en/latest/).
 
 ### Examples of Usage
 
