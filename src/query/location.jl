@@ -27,6 +27,7 @@ end
 @doc """ query a lot of positions 
 """ ->
 function query_gene(data::Array{ASCIIString,2})
+    info("query gene location for you ...")
     @assert size(data,2) == 2
     n = size(data,1)
     genes = Array{ASCIIString,1}(n)
