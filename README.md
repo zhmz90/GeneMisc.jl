@@ -4,6 +4,8 @@
 
 ### What can GeneMisc do now?
 * Given a location,  find gene.
+* Given a location,  find nearest gene name and exon number.
+
 * Given a gene nane, find its location.
 * Given a gene name, find its synonyms genes, but the synonyms genes may not complete due to the limitation of our data.
 
