@@ -1,7 +1,7 @@
 
 function __init__()
-    global chr_rngs = load_chr_rngs()
-    global rng_exon = load_rng_exon()
+#    global chr_rngs = load_chr_rngs()
+#    global rng_exon = load_rng_exon()
 end
 
 @doc """ return gene_name, exton_number
@@ -15,6 +15,8 @@ from even, find the two numbers surround Q
 index2: ranges=>exon
 """ ->
 function query_exon(chr::ASCIIString,pos::ASCIIString,direct::ASCIIString)
+    global chr_rngs = load_chr_rngs()
+    global rng_exon = load_rng_exon()
     pos = parse(UInt64,pos)
     query_exon(chr,pos,direct)
 end
