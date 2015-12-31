@@ -11,3 +11,4 @@
 *.fasta
 *.txt
 data/*
+*.vcf
