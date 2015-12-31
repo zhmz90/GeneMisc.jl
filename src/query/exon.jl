@@ -1,8 +1,8 @@
 
-function __init__()
+#function __init__()
 #    global chr_rngs = load_chr_rngs()
 #    global rng_exon = load_rng_exon()
-end
+#end
 
 @doc """ return gene_name, exton_number
 index1: chr=>ranges
