@@ -9,17 +9,26 @@ function build_index_exon()
     info("Building index for querying exon")
     gtf_data = read_gtf()
     # below can be parallel
-    chr_range_index(gtf_data)
+    chr_rngs = chr_range_index(gtf_data)
     #range_exon_index(gtf_data)
     
-    nothing
+    chr_rngs
 end
-
+#=
+function chr_range_index(data::Array{ASCIIString,2})
+    directs = data[:,7]
+    pos_idx = directs .== "+"
+    neg_idx = directs .== "-"
+    pos = chr_range_direct_index(data[pos_idx,:])
+    neg = chr_range_direct_index(data[neg_idx,:])
+    pos,neg
+end
+=#
 @doc """ build the index of chr=>sorted_ranges from exon data
-         
 """ ->
 function chr_range_index(data::Array{ASCIIString,2})
     chrs = data[:,1]
+    #directs = data[:,7]
     rngs = ranges_data(data)
     chr_rng_pair = sort(collect(zip(chrs, rngs)))
     chr_rngs_dict = Dict{ASCIIString, Set{Tuple{UInt64,UInt64}}}()
@@ -40,9 +49,9 @@ function chr_range_index(data::Array{ASCIIString,2})
     tmp = map(x->Pair(x[1],sort(collect(x[2]))), collect(chr_rngs_dict))
     chr_rngs_dict = Dict(tmp)
 
-    save(chr_rngs_exon_fl, "chr_rngs_exon_dict", chr_rngs_dict)
+    #save(chr_rngs_exon_fl, "chr_rngs_exon_dict", chr_rngs_dict)
     
-    nothing
+    chr_rngs_dict
 end
 
 @doc """ build the index of range=>gene_name,exon_number from exon data
@@ -50,15 +59,33 @@ end
 function range_exon_index(data::Array{ASCIIString,2})
     info("buiding range_exon_index ...")
     rngs = ranges_data(data)
+    chrs =  data[:,1]
+    num_re = length(chrs)
+    #rngs = hcat(chrs,rngs)
+    rngs = map(i->(chrs[i],rngs[i]),1:num_re)
     exons = data[:,9]
     geneid_exonnumber = map(exon->
                          filter(x->contains(x,"gene_name")||contains(x,"exon_number"),
                                 split(exon,";")), exons)
 
-    #@show geneid_exonnumber[1:5]
+    num_recods = length(geneid_exonnumber)
+    #gene_exon = map(a->  ,geneid_exonnumber)
+    gene_exon  = Tuple{ASCIIString,ASCIIString}[]
+    for record in geneid_exonnumber
+        geneid,exonnumber = record
+        gene = split(geneid,"\"")[2]
+        exon = split(exonnumber," ")[3]
+        push!(gene_exon,(gene,exon))
+    end
+#   @show typeof(rngs),typeof(gene_exon)
+    @assert length(rngs) == length(gene_exon)
+    rng_exon_dict = Dict{Tuple{ASCIIString,Tuple{ASCIIString,ASCIIString}},Tuple{ASCIIString,ASCIIString}}()
+    for i in 1:length(rngs)
+        rng_exon_dict[rngs[i]] = gene_exon[i]
+    end
     
-    #return 
-    rng_exon_dict = Dict(zip(rngs, geneid_exonnumber))
+    #rng_exon_dict = Dict(zip(rngs, gene_exon))
+    
     #not save it
     #save(rng_exon_dict_fl, "rng_exon_dict", rng_exon_dict)
     info("range exon index saved in $rng_exon_dict_fl")
@@ -107,4 +134,3 @@ function read_gtf()
     end
     records[1:idx,:]
 end
-

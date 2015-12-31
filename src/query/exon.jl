@@ -26,7 +26,8 @@ function query_exon(chr::ASCIIString, pos::UInt64, direct::ASCIIString)
     
     #need to check
     function ret(idx)
-        map(x->convert(ASCIIString,x), rng_exon[map(x->string(Int64(x)),rngs_target[idx])])
+        rng = map(x->string(Int64(x)), rngs_target[idx])
+        map(x->convert(ASCIIString,x), rng_exon[chr,rng])
     end
     num_rng = length(rngs_target)
     st_idx = searchsortedfirst(sts_sorted, pos)
@@ -48,10 +49,10 @@ function query_exon(chr::ASCIIString, pos::UInt64, direct::ASCIIString)
     if ed2 == pos
         return ret(ed_idx)
     end
-    @show pos,st1,st2,ed1,ed2
-    if pos < ed1
+    #@show pos,st1,st2,ed1,ed2
+    if st_idx != ed_idx
         return ret(st_idx-1)
-    else
+    elseif st_idx == ed_idx
         if direct == "-"
             return ret(st_idx)
         elseif direct == "+"
@@ -81,8 +82,8 @@ function query_exon(chr::ASCIIString, pos::UInt64, direct::ASCIIString)
 end
 
 function load_chr_rngs()
-    build_index_exon()
-    chr_rngs = load(chr_rngs_exon_fl, "chr_rngs_exon_dict")
+    chr_rngs = build_index_exon()
+    #chr_rngs = load(chr_rngs_exon_fl, "chr_rngs_exon_dict")
     chr_rngs
 end
 
