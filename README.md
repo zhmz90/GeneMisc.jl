@@ -1,11 +1,9 @@
 # GeneMisc
-Linux, OSX: [![Build Status](https://travis-ci.org/OpenGene/GeneMisc.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneMisc.jl) 
 
-Windows: [![Build Status](https://ci.appveyor.com/api/projects/status/fve72oqy74jm3hmr/branch/master?svg=true)](https://ci.appveyor.com/project/zhmz90/genemisc-jl/branch/master)
-
-Code Coverage: [![Coverage Status](https://coveralls.io/repos/OpenGene/GeneMisc.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/OpenGene/GeneMisc.jl?branch=master)
-
-Documentation: [![Documentation Status](http://readthedocs.org/projects/genemiscjl/badge/?version=latest)](http://genemiscjl.readthedocs.org/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/OpenGene/GeneMisc.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneMisc.jl) 
+[![Build Status](https://ci.appveyor.com/api/projects/status/fve72oqy74jm3hmr/branch/master?svg=true)](https://ci.appveyor.com/project/zhmz90/genemisc-jl/branch/master)
+[![Coverage Status](https://coveralls.io/repos/OpenGene/GeneMisc.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/OpenGene/GeneMisc.jl?branch=master)
+[![Documentation Status](http://readthedocs.org/projects/genemiscjl/badge/?version=latest)](http://genemiscjl.readthedocs.org/en/latest/?badge=latest)
 
 
 This project is under active developing, if you encountered any troubles, open an issue please.
