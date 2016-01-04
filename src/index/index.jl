@@ -8,9 +8,9 @@ include("exon.jl")
 function build_index()
     info("Building index now")
     @sync begin
-        @spawn build_index_synonym()
+        build_index_synonym()
         @spawn build_index_geneloc()
-        @spawn build_index_exon()
+        build_index_exon()
     end
     info("Building index done")
     true
