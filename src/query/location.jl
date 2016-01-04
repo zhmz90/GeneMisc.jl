@@ -3,15 +3,18 @@
           Foundational function
 """ ->
 function query_gene(chr::ASCIIString,pos::Int64)
-    if !isdefined(:chr_sted_gene)
+    info("query_gene for a chr,pos")
+    if !isdefined(GeneMisc,:chr_sted_gene)
+        warn("chr_sted_gene is not defined,load_index starts")
         load_index()
+        
     end
     sted_gene = chr_sted_gene[chr]
 
     steds = collect(keys(sted_gene))
     # sorted by acclerator speed
-    starts = sort(map(x[1], steds))
-    ends   = sort(map(x[2], steds))
+    starts = sort(map(x->x[1], steds))
+    ends   = sort(map(x->x[2], steds))
     idx_st = searchsortedfirst(starts, pos)
     idx_ed = searchsortedfirst(ends, pos)
     function result(idx)
@@ -23,13 +26,13 @@ function query_gene(chr::ASCIIString,pos::Int64)
         if starts[1] < pos
             return ""
         end
-        return result[1]
+        return result(1)
     end
     if idx_st == idx_ed
         if ends[idx_ed] > pos
             return ""
         end
-        return result[idx_st]
+        return result(idx_st)
     end
     
     #=
@@ -67,7 +70,7 @@ end
 @doc """ Given a gene name, find its location: chr, st, ed
 """ ->
 function query_geneloc(genename::ASCIIString)
-    if !isdefined(:gene_chrsted)
+    if !isdefined(GeneMisc, :gene_chrsted)
         load_index()
     end
     gene_chrsted[genename]
