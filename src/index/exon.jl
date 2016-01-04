@@ -7,8 +7,8 @@ const eds_exon_fl = joinpath(data_dir, "eds_exon.jld")
 """ ->
 function build_index_exon()
     info("Building index for querying exon")
-    gtf_data = read_gtf()
-    # below can be parallel
+    gtf_data = read_gtf_exon()
+    # below can be parrallel
     chr_rngs = chr_range_index(gtf_data)
     #range_exon_index(gtf_data)
     
@@ -104,13 +104,13 @@ end
 
 @doc """ read gtf file with out header info
 """ ->
-function read_gtf()
+function read_gtf_exon()
     if !isfile(genecode_fl)
         download_gencode()
     end
     num_line = countlines(genecode_fl)
     info("gtf total lines $num_line")
-    records =  Array{ASCIIString,2}(num_line,9)
+    records = Array{ASCIIString,2}(num_line,9)
     idx = 0
     open(genecode_fl) do file
         while !eof(file)

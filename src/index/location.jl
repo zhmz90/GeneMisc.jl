@@ -19,7 +19,7 @@ end
 
 @doc """ read gtf file with out header info
 """ ->
-function read_gtf()
+function read_gtf_gene()
     if !isfile(genecode_fl)
         download_gencode()
     end
@@ -105,14 +105,13 @@ function get_gene_mgp(data::Array{ASCIIString,2})
     nothing
 end
 
-
 @doc """ build index pos_gene dict
 """ ->
 function build_index_geneloc()
     info("reading gtf file to memory")
-    gtf = read_gtf()
+    gtf = read_gtf_gene()
     info("Getting gene position from gtf data")
-    gene_mgps = get_gene_mgp(gtf)
-    info("building gene_location")
+    get_gene_mgp(gtf)
+    info("built gene_location successfully")
     true
 end

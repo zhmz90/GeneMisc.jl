@@ -22,7 +22,7 @@ function query_exon(chr::ASCIIString,pos::ASCIIString,direct::ASCIIString)
 end
 function query_exon(chr::ASCIIString, pos::UInt64, direct::ASCIIString)
     #load index
-    rngs_target =  chr_rngs[chr]
+    rngs_target = chr_rngs[chr]
     sts_sorted = map(x->x[1],rngs_target)
     eds_sorted = map(x->x[2],rngs_target)
     

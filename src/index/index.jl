@@ -10,6 +10,7 @@ function build_index()
     @sync begin
         @spawn build_index_synonym()
         @spawn build_index_geneloc()
+        @spawn build_index_exon()
     end
     info("Building index done")
     true
@@ -27,7 +28,9 @@ function load_index()
     global gene_id  = load(gene_id_fl,  "gene_id_dict")
     global chr_sted_gene = load(chr_sted_gene_fl, "chr_sted_gene_dict")
     global gene_chrsted  = load(gene_chrsted_fl, "gene_chrsted_dict")
-    gene_id,id_genes,chr_sted_gene,gene_chrsted
+    #gene_id,id_genes,chr_sted_gene,gene_chrsted
+    
+    nothing
 end
 
 
