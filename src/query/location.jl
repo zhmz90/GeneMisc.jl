@@ -7,13 +7,39 @@ function query_gene(chr::ASCIIString,pos::Int64)
         load_index()
     end
     sted_gene = chr_sted_gene[chr]
+
     steds = collect(keys(sted_gene))
     # sorted by acclerator speed
+    starts = sort(map(x[1], steds))
+    ends   = sort(map(x[2], steds))
+    idx_st = searchsortedfirst(starts, pos)
+    idx_ed = searchsortedfirst(ends, pos)
+    function result(idx)
+        st = starts[idx]
+        ed = ends[idx]
+        sted_gene[(st,ed)]
+    end
+    if idx_st == 1
+        if starts[1] < pos
+            return ""
+        end
+        return result[1]
+    end
+    if idx_st == idx_ed
+        if ends[idx_ed] > pos
+            return ""
+        end
+        return result[idx_st]
+    end
+    
+    #=
     for (st,ed) in steds
         if st<=pos<=ed
             return sted_gene[(st,ed)]
         end
     end
+    =#
+    
     ""
 end
 
