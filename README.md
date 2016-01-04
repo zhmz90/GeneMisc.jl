@@ -1,6 +1,7 @@
 # GeneMisc
 [![Build Status](https://travis-ci.org/OpenGene/GeneMisc.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneMisc.jl) 
 [![Documentation Status](http://readthedocs.org/projects/genemiscjl/badge/?version=latest)](http://genemiscjl.readthedocs.org/en/latest/?badge=latest)
+[![Coverage Status](https://coveralls.io/repos/OpenGene/GeneMisc.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/OpenGene/GeneMisc.jl?branch=master)
 
 This project is under active developing, if you encountered any troubles, open an issue please.
 
