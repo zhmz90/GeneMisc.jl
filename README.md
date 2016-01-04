@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/OpenGene/GeneMisc.jl.svg?branch=master)](https://travis-ci.org/OpenGene/GeneMisc.jl) 
 [![Documentation Status](http://readthedocs.org/projects/genemiscjl/badge/?version=latest)](http://genemiscjl.readthedocs.org/en/latest/?badge=latest)
 
+This project is under active developing, if you encountered any troubles, open an issue please.
+
 ### What can GeneMisc do now?
 * Given a location,  find gene.
 * Given a location,  find nearest gene name and exon number.
@@ -16,7 +18,7 @@
 	Pkg.build("GeneMisc")
 	Pkg.test("GeneMisc")
 	
-This project is under active developing, if you encountered any troubles, open an issue please.
+
 
 For more information, please refer to the [documentation](http://genemiscjl.readthedocs.org/en/latest/).
 
