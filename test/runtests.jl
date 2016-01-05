@@ -9,7 +9,7 @@ using Base.Test
 
 include("synonym.jl")
 include("location.jl")
-
+include("exon.jl")
 #=
 let gene = "KRAS", genesyn = ["KRAS","C-K-RAS","CFC2","K-RAS2A","K-RAS2B",
                               "K-RAS4A","K-RAS4B","KI-RAS","KRAS1","KRAS2",

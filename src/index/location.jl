@@ -50,7 +50,7 @@ end
 @doc """ get gene_name, chr, start, end  given a record
          mgp means mutation genome position
 """ ->
-function get_gene_mgp(fields::Array{ASCIIString,1})
+function get_gene_mgp_1(fields::Array{ASCIIString,1})
     @assert length(fields) == 9
     chr = convert(ASCIIString, fields[1])
     st  = convert(ASCIIString, fields[4])
@@ -65,14 +65,14 @@ end
 
 @doc """ get chr, start, end, gene_name given records
 """ ->
-function get_gene_mgp(data::Array{ASCIIString,2})
+function get_gene_mgp_2(data::Array{ASCIIString,2})
     info("begin get_gene_mgp")
     @assert size(data,2) == 9
     n = size(data,1)
     
     gene_location = Dict{ASCIIString,Tuple{ASCIIString,ASCIIString,ASCIIString}}()
     for i = 1:n
-        gene_name,chr,st,ed = get_gene_mgp(data[i,:])
+        gene_name,chr,st,ed = get_gene_mgp_1(data[i,:])
         gene_location[gene_name] = (chr,st,ed)
     end
     # gene_chrsted
@@ -111,7 +111,7 @@ function build_index_geneloc()
     info("reading gtf file to memory")
     gtf = read_gtf_gene()
     info("Getting gene position from gtf data")
-    get_gene_mgp(gtf)
+    get_gene_mgp_2(gtf)
     info("built gene_location successfully")
     true
 end
