@@ -37,6 +37,9 @@ function read_gtf_gene()
             if fields[3] != "gene"
                 continue
             end
+            if contains(fields[9],"gene_type \"pseudogene\"")
+                continue
+            end            
             idx += 1
             idx % 1000_000 == 0 && info("processing $idx line now")
             num_field = length(fields)

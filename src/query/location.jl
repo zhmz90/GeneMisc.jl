@@ -3,36 +3,40 @@
           Foundational function
 """ ->
 function query_gene(chr::ASCIIString,pos::Int64)
-#    info("query_gene for a chr,pos")
+    info("query_gene for a $chr,$pos")
     if !isdefined(GeneMisc,:chr_sted_gene)
         warn("chr_sted_gene is not defined,load_index starts")
         load_index()
-        
     end
     sted_gene = chr_sted_gene[chr]
-
+    
     steds = collect(keys(sted_gene))
     # sorted by acclerator speed
     starts = sort(map(x->x[1], steds))
     ends   = sort(map(x->x[2], steds))
     idx_st = searchsortedfirst(starts, pos)
     idx_ed = searchsortedfirst(ends, pos)
-    function result(idx)
-        st = starts[idx]
-        ed = ends[idx]
+    function result(st_idx,ed_idx)
+        info("$st_idx, $ed_idx")
+        st = starts[st_idx]
+        ed = ends[ed_idx]
         sted_gene[(st,ed)]
     end
     if idx_st == 1
         if starts[1] < pos
             return ""
         end
-        return result(1)
+        @assert starts[1] >= pos
+        return result(1,1)
     end
     if idx_st == idx_ed
-        if ends[idx_ed] > pos
-            return ""
-        end
-        return result(idx_st)
+        #if ends[idx_ed] > pos
+        return ""
+        #end
+        #return result(idx_st)
+    else
+        @assert idx_st > idx_ed
+        return result(idx_st-1,idx_ed)
     end
     
     #=
