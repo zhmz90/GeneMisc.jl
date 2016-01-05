@@ -72,7 +72,7 @@ function get_gene_mgp_2(data::Array{ASCIIString,2})
     
     gene_location = Dict{ASCIIString,Tuple{ASCIIString,ASCIIString,ASCIIString}}()
     for i = 1:n
-        gene_name,chr,st,ed = get_gene_mgp_1(data[i,:])
+        gene_name,chr,st,ed = get_gene_mgp_1(data'[:,i])
         gene_location[gene_name] = (chr,st,ed)
     end
     # gene_chrsted
