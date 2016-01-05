@@ -14,6 +14,15 @@ function query_gene(chr::ASCIIString,pos::Int64)
     # sorted by acclerator speed
     starts = sort(map(x->x[1], steds))
     ends   = sort(map(x->x[2], steds))
+    debug = true
+    if debug check_sted(starts,ends) end
+    function check_sted(starts,ends)
+        l = length(starts)
+        @assert length(ends) == l
+        for i in 1:l
+            @assert starts[i] < ends[i]
+        end
+    end
     idx_st = searchsortedfirst(starts, pos)
     idx_ed = searchsortedfirst(ends, pos)
     function result(st_idx,ed_idx)
