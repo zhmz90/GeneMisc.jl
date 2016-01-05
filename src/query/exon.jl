@@ -91,5 +91,5 @@ end
 
 function load_rng_exon()
     #load(rng_exon_dict_fl, "rng_exon_dict")
-    range_exon_index(read_gtf())
+    range_exon_index(read_gtf_exon())
 end
