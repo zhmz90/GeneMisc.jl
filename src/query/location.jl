@@ -3,7 +3,7 @@
           Foundational function
 """ ->
 function query_gene(chr::ASCIIString,pos::Int64)
-    info("query_gene for a chr,pos")
+#    info("query_gene for a chr,pos")
     if !isdefined(GeneMisc,:chr_sted_gene)
         warn("chr_sted_gene is not defined,load_index starts")
         load_index()
