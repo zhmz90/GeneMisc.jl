@@ -7,7 +7,7 @@ using Base.Test
 
 @test 1 == 1
 
-#include("synonym.jl")
+include("synonym.jl")
 #include("location.jl")
 #include("exon.jl")
 #=
