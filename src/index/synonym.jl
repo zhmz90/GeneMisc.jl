@@ -9,7 +9,8 @@ function read_data()
         cur_dir =  pwd()
         cd(data_dir)
         cmd = `wget ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz`
-        run(cmd)
+    #    run(cmd)
+        download("ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz")
         run(`gunzip $(string(hs_fl,".gz"))`)
         cd(cur_dir)
     end
