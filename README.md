@@ -8,6 +8,8 @@
 
 This project is under active developing, if you encountered any troubles, open an issue please.
 
+I am refactoring this package now, any suggestion is more than welcome.
+
 ### What can GeneMisc do now?
 * Given a location,  find gene.
 * Given a location,  find nearest gene name and exon number.
