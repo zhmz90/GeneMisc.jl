@@ -15,7 +15,6 @@ function query_gene(chr::ASCIIString,pos::Int64)
     starts = sort(map(x->x[1], steds))
     ends   = sort(map(x->x[2], steds))
     debug = true
-    if debug check_sted(starts,ends) end
     function check_sted(starts,ends)
         l = length(starts)
         @assert length(ends) == l
@@ -23,6 +22,7 @@ function query_gene(chr::ASCIIString,pos::Int64)
             @assert starts[i] < ends[i]
         end
     end
+    if debug check_sted(starts,ends) end
     idx_st = searchsortedfirst(starts, pos)
     idx_ed = searchsortedfirst(ends, pos)
     function result(st_idx,ed_idx)
